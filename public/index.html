@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#05060f">
+<title>LiquidDrop</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<main>
+
+<section id="home" class="screen active">
+  <div class="logo">LiquidDrop</div>
+  <h1>Share files.<br><span>Live.</span></h1>
+  <p class="sub">Fast private peer-to-peer file sharing.</p>
+  <div class="stack">
+    <button class="btn primary" id="goSend">📤 Send File</button>
+    <button class="btn" id="goJoin">🔗 Join with Code</button>
+  </div>
+  <div class="chips"><span>⚡ WebRTC</span><span>🔒 P2P</span><span>🫧 Liquid Glass</span></div>
+</section>
+
+<section id="send" class="screen">
+  <h2>Send File</h2>
+  <p class="sub">Select files</p>
+  <input type="file" id="fileInput" multiple hidden>
+  <label class="glass drop" for="fileInput"><b>＋</b><span>Tap to choose files</span><small>or select multiple files</small></label>
+  <ul id="fileList" class="glass files" hidden></ul>
+  <p class="msg" id="sendMsg" role="alert"></p>
+  <div class="stack">
+    <button class="btn primary" id="createRoom">Create Live Room</button>
+    <button class="btn ghost" data-go="home">Back</button>
+  </div>
+</section>
+
+<section id="room" class="screen">
+  <h2>Your Room Code</h2>
+  <div class="glass codebox"><div class="code" id="code">------</div></div>
+  <button class="btn" id="copyBtn">Copy Code</button>
+  <p class="status" id="roomStatus" aria-live="polite">🟢 Waiting for the other device...</p>
+  <button class="btn ghost" data-go="home">Cancel</button>
+</section>
+
+<section id="join" class="screen">
+  <h2>Enter Room Code</h2>
+  <input class="glass codeinput" id="codeInput" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="one-time-code" placeholder="000000" aria-label="6-digit room code">
+  <p class="msg" id="joinMsg" role="alert" aria-live="polite"></p>
+  <div class="stack">
+    <button class="btn primary" id="connectBtn">Connect</button>
+    <button class="btn ghost" data-go="home">Back</button>
+  </div>
+</section>
+
+<section id="transfer" class="screen">
+  <h2 id="tTitle">Sending</h2>
+  <div class="glass card">
+    <div class="fname" id="tName">—</div>
+    <div class="bar"><div id="tBar"></div></div>
+    <div class="pct" id="tPct">0%</div>
+    <div class="row"><span id="tSize">0 B / 0 B</span><span id="tSpeed">0 MB/s</span></div>
+    <div class="row dim"><span id="tFileNo">File 1 of 1</span><span id="tConn">Connecting</span></div>
+  </div>
+  <div id="done" hidden>
+    <div class="ok">✓ Transfer Complete</div>
+    <div id="downloads" class="stack"></div>
+    <button class="btn ghost" data-go="home">Done</button>
+  </div>
+</section>
+
+<section id="error" class="screen">
+  <h2>Something went wrong</h2>
+  <p class="glass errbox" id="errMsg" role="alert"></p>
+  <button class="btn primary" data-go="home">Back to Home</button>
+</section>
+
+</main>
+<script src="app.js"></script>
+</body>
+</html>
