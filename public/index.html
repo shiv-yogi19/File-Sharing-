@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#04050d">
+<title>LiquidDrop — Live P2P File Sharing</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#app">Skip to content</a>
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+<main id="app">
+<ol id="steps" class="steps glass" aria-label="Progress" hidden></ol>
+
+<section id="home" class="screen active">
+  <div class="logo">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#c084fc"/></linearGradient></defs><path fill="url(#lg)" d="M12 2.5c3.6 4.3 6 7.4 6 10.5a6 6 0 0 1-12 0c0-3.1 2.4-6.2 6-10.5z"/></svg>
+    LiquidDrop
+  </div>
+  <h1>Share files.<br><span>Live.</span></h1>
+  <p class="sub">Fast private peer-to-peer file sharing.</p>
+  <div class="stack">
+    <button class="btn primary" id="goSend" type="button">📤 Send File</button>
+    <button class="btn" id="goJoin" type="button">🔗 Join with Code</button>
+  </div>
+  <div class="chips"><span>⚡ WebRTC</span><span>🔒 P2P</span><span>🫧 Liquid Glass</span></div>
+</section>
+
+<section id="send" class="screen">
+  <h2>Send File</h2>
+  <p class="sub">Select one or more files</p>
+  <input type="file" id="fileInput" class="vh" multiple aria-label="Choose files to send">
+  <label class="glass sheen drop" id="dropLabel" for="fileInput">
+    <b aria-hidden="true">＋</b>
+    <span id="dropText">Tap to choose files</span>
+    <small>or select multiple files</small>
+  </label>
+  <ul id="fileList" class="glass files" aria-label="Selected files" hidden></ul>
+  <p class="sum" id="fileSum" hidden></p>
+  <p class="msg" id="sendMsg" role="alert"></p>
+  <div class="stack">
+    <button class="btn primary" id="createRoom" type="button">Create Live Room</button>
+    <button class="btn ghost" data-go="home" type="button">Back</button>
+  </div>
+</section>
+
+<section id="room" class="screen" data-state="wait">
+  <h2>Your Room Code</h2>
+  <div class="glass sheen codebox"><div class="code" id="code" aria-label="Room code">------</div></div>
+  <button class="btn" id="copyBtn" type="button">Copy Code</button>
+  <div class="radar" aria-hidden="true"><i></i><i></i><i></i></div>
+  <p class="status" id="roomStatus" aria-live="polite">🟢 Waiting for the other device...</p>
+  <button class="btn ghost" data-go="home" type="button">Cancel</button>
+</section>
+
+<section id="join" class="screen">
+  <h2>Enter Room Code</h2>
+  <p class="sub">Type the 6-digit code shown on the sender's screen</p>
+  <div class="otp" id="otp">
+    <b aria-hidden="true"></b><b aria-hidden="true"></b><b aria-hidden="true"></b><b aria-hidden="true"></b><b aria-hidden="true"></b><b aria-hidden="true"></b>
+    <input id="codeInput" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="one-time-code" aria-label="6-digit room code">
+  </div>
+  <p class="msg" id="joinMsg" role="alert" aria-live="polite"></p>
+  <div class="stack">
+    <button class="btn primary" id="connectBtn" type="button">Connect</button>
+    <button class="btn ghost" data-go="home" type="button">Back</button>
+  </div>
+</section>
+
+<section id="transfer" class="screen">
+  <h2 id="tTitle">Sending</h2>
+  <div class="glass sheen card" id="tCard">
+    <div class="link" aria-hidden="true"><span>📱</span><i></i><span>📱</span></div>
+    <div class="state" id="tState" aria-live="polite">Connecting</div>
+    <div class="fname" id="tName">—</div>
+    <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="tBarWrap"><div id="tBar"></div></div>
+    <div class="pct" id="tPct">0%</div>
+    <div class="row"><span id="tSize">0 B / 0 B</span><span id="tSpeed">0 B/s</span></div>
+    <div class="row dim"><span id="tFileNo">File 1 of 1</span><span id="tEta">ETA —</span></div>
+    <div class="row dim"><span>Connection</span><span id="tConn">Connecting</span></div>
+  </div>
+  <div id="done" hidden>
+    <div class="success">
+      <svg viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="23"/><path d="M15 27l8 8 14-16"/></svg>
+      <div class="ok" id="okText">✓ Transfer Complete</div>
+      <p class="sub" id="okSub"></p>
+    </div>
+    <div id="downloads" class="stack"></div>
+    <button class="btn ghost" data-go="home" type="button">Done</button>
+  </div>
+</section>
+
+<section id="error" class="screen">
+  <div class="erricon" aria-hidden="true"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="23"/><path d="M18 18l16 16M34 18L18 34"/></svg></div>
+  <h2>Something went wrong</h2>
+  <p class="glass errbox" id="errMsg" role="alert"></p>
+  <div class="stack">
+    <button class="btn primary" id="retryBtn" type="button">Try Again</button>
+    <button class="btn ghost" data-go="home" type="button">Back to Home</button>
+  </div>
+</section>
+</main>
+
+<div class="wm glass" aria-label="Shiv Yogi">✦ Shiv Yogi</div>
+<script src="app.js"></script>
+</body>
+</html>
